@@ -31,9 +31,14 @@ from openedx.core.djangolib.markup import HTML, Text
       <input type="text" name="search_query" id="home-search" value="" autocomplete="off" role="combobox" aria-autocomplete="list" aria-owns="react-autowhatever-home-search-search-bar" aria-expanded="false" aria-haspopup="false" class="react-autosuggest__input" placeholder="" spellcheck="false">
       <button id="edit-submit-home-search" class="btn btn-transparent edit-submit form-submit js-search-button" type="submit">
       <span class="sr">Submit a course search</span>
-      <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span></button></div>
+      <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span></button>
+  </div>
     </form>
-    <div id="react-autowhatever-home-search-search-bar" class="react-autosuggest__suggestions-container"><!-- react-text: 24 --><!-- /react-text --></div></div></div></div></div>
+    <div id="react-autowhatever-home-search-search-bar" class="react-autosuggest__suggestions-container"><!-- react-text: 24 --><!-- /react-text --></div>
+  </div>
+  </div>
+  </div>
+  </div>
   
   <div class="js-trust-bar trust-bar-container carousel-container">
   <div class="slick-initialized slick-slider carousel-wrapper"><button class="js-carousel-nav carousel-arrow prev"><span class="icon fa fa-chevron-left" aria-hidden="true"></span><span class="sr">Scroll carousel backwards</span></button>
@@ -183,7 +188,7 @@ from openedx.core.djangolib.markup import HTML, Text
 % if show_homepage_promo_video:
   <section id="video-modal" class="modal home-page-video-modal video-modal">
     <div class="inner-wrapper">
-      <iframe title="YouTube Video" width="640" height="360" src="<iframe width="853" height="480" src="https://www.youtube.com/embed/SX4GXlBzF0I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>></iframe>
+      <iframe title="YouTube Video" width="640" height="360" src="<iframe width="853px>" height="480" src="https://www.youtube.com/embed/SX4GXlBzF0I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" ></iframe>></iframe>
     </div>
   </section>
 % endif
@@ -210,12 +215,8 @@ from openedx.core.djangolib.markup import HTML, Text
 $('.slick-track').slick({
   infinite: false,
   slidesToShow: 6,
-  slidesToScroll: 6
+  slidesToScroll: 6,
   prevArrow: $('.prev'),
   nextArrow: $('.next'),
 });
 </script>
-
-<section id="container-fluid">
-
-</section>
