@@ -8,7 +8,9 @@ from django.urls import reverse
 from openedx.core.djangolib.markup import HTML, Text
 %>
 
-
+<script type="text/javascript" src="~/lms/static/scripts/dist/bootstrap.js"></script>
+<script type="text/javascript" src="~/lms/static/scripts/dist/jquery.js"></script>
+<script type="text/javascript" src="~/lms/static/scripts/dist/slick.js"></script>
 
 
 <main id="main-content" class="js-home-page edx-home-page" aria-label="Content" data-&main-content="{quot;inlineMerchandising&quot;:{&quot;backgroundImg&quot;:{&quot;small&quot;:&quot;\/sites\/default\/files\/homepage\/banner\/bkg\/online-learning-inline-768x340_0.png&quot;,&quot;medium&quot;:&quot;\/sites\/default\/files\/homepage\/banner\/bkg\/online-learning-inline-979x314_0.png&quot;,&quot;large&quot;:&quot;\/sites\/default\/files\/homepage\/banner\/bkg\/online-learning-inline-1201x368_0.png&quot;},&quot;title&quot;:&quot;Tips for Successful Online Learning&quot;,&quot;subtitle&quot;:&quot;&quot;,&quot;cta&quot;:{&quot;text&quot;:&quot;Read more&quot;,&quot;url&quot;:&quot;https:\/\/blog.hadtech.tk\/tips-for-successful-online-learning\/&quot;}},&quot;heroMerchandising&quot;:null,&quot;trust_bar&quot;:{&quot;title&quot;:&quot;Schools and Partners&quot;,&quot;items&quot;:[{&quot;url&quot;:&quot;\/school\/mitx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/mit_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;Massachusetts Institute of Technology&quot;},{&quot;url&quot;:&quot;\/school\/harvardx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/harvard_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;Harvard University&quot;},{&quot;url&quot;:&quot;\/school\/uc-berkeleyx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/berkeley_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;UC Berkeley&quot;},{&quot;url&quot;:&quot;\/school\/utsystemx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/ut_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;University of Texas System&quot;},{&quot;url&quot;:&quot;\/school\/bux&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/boston_logo_200x101_0_0.png&quot;,&quot;alt&quot;:&quot;Boston University&quot;},{&quot;url&quot;:&quot;\/school\/hkpolyux&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/hkpolyu_upload_02052018_200x101.png&quot;,&quot;alt&quot;:&quot;The Hong Kong Polytechnic University&quot;},{&quot;url&quot;:&quot;\/school\/curtinx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/curtin-university-200x101.png&quot;,&quot;alt&quot;:&quot;Curtin University&quot;},{&quot;url&quot;:&quot;\/school\/rwthx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/rwthx-logo-200x101a.png&quot;,&quot;alt&quot;:&quot;The RWTH Aachen University&quot;},{&quot;url&quot;:&quot;\/school\/uqx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/uq_logo_purple_200x101px.png&quot;,&quot;alt&quot;:&quot;University of Queensland&quot;},{&quot;url&quot;:&quot;\/school\/usmx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/usmx_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;University System of Maryland&quot;},{&quot;url&quot;:&quot;\/school\/sorbonnex&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/sorbonne-200x101.png&quot;,&quot;alt&quot;:&quot;Sorbonne Universit\u00e9 - Cr\u00e9ateurs de Futurs Depuis 1257&quot;},{&quot;url&quot;:&quot;\/school\/getketownx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/getketown_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;Getketown University&quot;},{&quot;url&quot;:&quot;\/school\/delftx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/delft_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;Delft University of Technology&quot;},{&quot;url&quot;:&quot;\/school\/adelaidex&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/adelaide-200x101.png&quot;,&quot;alt&quot;:&quot;AdelaideX&quot;},{&quot;url&quot;:&quot;\/school\/anux&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/banner\/anu_logo_200x101_0.png&quot;,&quot;alt&quot;:&quot;Australian National University&quot;},{&quot;url&quot;:&quot;\/school\/ubcx&quot;,&quot;img&quot;:&quot;\/sites\/default\/files\/school\/image\/logo\/ubcx-200x101_0.jpg&quot;,&quot;alt&quot;:&quot;University of British Columbia&quot;}],&quot;cta&quot;:{&quot;text&quot;:&quot;See All Schools \u0026 Partners&quot;,&quot;url&quot;:&quot;\/schools-partners&quot;}}}">
@@ -28,16 +30,15 @@ from openedx.core.djangolib.markup import HTML, Text
       <button id="edit-submit-home-search" class="btn btn-transparent edit-submit form-submit js-search-button" type="submit">
       <span class="sr">Submit a course search</span>
       <span class="icon fa fa-search" aria-hidden="true"></span><span class="sr">${_("Search")}</span></button>
-  </div>
     </form>
-    <div id="react-autowhatever-home-search-search-bar" class="react-autosuggest__suggestions-container"><!-- react-text: 24 --><!-- /react-text --></div>
   </div>
+    <div id="react-autowhatever-home-search-search-bar" class="react-autosuggest__suggestions-container"><!-- react-text: 24 --><!-- /react-text --></div>
   </div>
   </div>
   </div>
   
   <div class="js-trust-bar trust-bar-container carousel-container">
-  <div class="slick-initialized slick-slider carousel-wrapper"><button class="js-carousel-nav carousel-arrow prev"><span class="icon fa fa-chevron-left" aria-hidden="true"></span><span class="sr">Scroll carousel backwards</span></button>
+  <div class="slick-initialized slick-slider carousel-wrapper"><button class="js-carousel-nav carousel-arrow prev active"><span class="icon fa fa-chevron-left" aria-hidden="true"></span><span class="sr">Scroll carousel backwards</span></button>
   <div class="slick-list">
     <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px); width: 4462.5px;">
       <div class="slick-slide slick-active carousel-item" data-index="0" tabindex="-1" style="outline: none; width: 178.5px;"><a href="/school/mitx" rel="canonical" class="carousel-link"><img src="${static.url("images/banner/images1.jpg")}" class="carousel-img" alt="Massachusetts Institute of Technology"></a></div>
@@ -63,43 +64,42 @@ from openedx.core.djangolib.markup import HTML, Text
         <div class="carousel-item"><a class="carousel-link" href="/school/mitx"><img src="/sites/default/files/school/image/banner/mit_logo_200x101_0.png" class="carousel-img" alt="Massachusetts Institute of Technology"></a></div>
         <div class="carousel-item"><a class="carousel-link" href="/school/harvardx"><img src="/sites/default/files/school/image/banner/harvard_logo_200x101_0.png" class="carousel-img" alt="Harvard University"></a></div></div></div>
 
-    <div class="row">
-        <section class="highlighted-courses col-md-12">
+    <div class="row-container">
+        <div class="highlighted-courses col-md-12">
 
           <header class="text-center header-tab">
             <h2>What you can learn from HADTech</h2>
           </header>
-          <section class="row how-hadtech-works">
-            <div class="col-md-3 col-sm-6 col-xs-12">
+          <ul class="row how-hadtech-works">
+            <li class="col-md-3 col-sm-6 col-xs-12">
               <h3>Free Online Courses</h3>
-              <p>
+              <small>
                 Our courses are taught by industry experts. You can enroll anytime, anywhere.
-              </p>
-            </div>
+              </small>
+            </li>
 
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <li class="col-md-3 col-sm-6 col-xs-12">
               <h3>New Skills</h3>
-              <p>
+              <small>
                 You can share your achievement with your network when you pass a final exam.
-              </p>
-              <br><br>
-            </div>
+              </small>
+            </li>
 
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <li class="col-md-3 col-sm-6 col-xs-12">
               <h3>Career Opportunities</h3>
-              <p>
+              <small>
                 We get you jobs through Aquent, one of the largest staffing agencies in the world.
-              </p>
-            </div>
+              </small>
+            </li>
 
-            <div class="col-md-3 col-sm-6 col-xs-12">
+            <li class="col-md-3 col-sm-6 col-xs-12">
               <h3>Lifelong Learning</h3>
-              <p>
+              <small>
                 We produce articles, tutorials, and webinars with trailblazers in the web community.
-              </p>
-            </div>
-          </section>
-        </section>
+              </small>
+            </li>
+          </ul>
+        </div>
     </div>
 
 <!--        <div class="merchandising-banner inline-merchandising home-content">
@@ -207,7 +207,7 @@ from openedx.core.djangolib.markup import HTML, Text
 </script>
 % endif
 
-<script>
+<script type="text/javascript">
 $('.slick-track').slick({
   infinite: false,
   slidesToShow: 6,
