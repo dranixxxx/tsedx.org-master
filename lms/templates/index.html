@@ -254,7 +254,42 @@ nutphai.addEventListener('click',function(){
 });
 
 </script>
+ <style type="text/css">
+    .slick-initialized.slick-slider.carousel-wrapper{
+   height:100%;
+   height: 100px;
+   position: relative;
+}
 
+
+.slick-list{
+  width:100%;
+  height: 100%;
+  margin-top: 0px;
+}
+
+.active_slide{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  opacity: 0;
+}
+
+.slide_active{
+  animation:chuyendong 1s forwards;
+  opacity: 1;
+}
+
+@-webkit-keyframes chuyendong{
+  from{
+     transform:translateX(-100%);
+  }
+
+  to{
+     transform:translateX(0%);
+  }
+}
+  </style>
 <script type="text/javascript">
 $('.slick-track').slick({
   infinite: false,
