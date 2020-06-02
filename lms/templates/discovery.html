@@ -24,10 +24,9 @@
 
     <aside aria-label="Refine your search" class="search-facets phone-menu">
       <h2 class="header-search-facets">Refine Your Search</h2>
-      <section class="search-facets-lists"></section>
+      <section class="search-facets-lists search-facets-uamx"></section>
     </aside>
-  </div>
-
+  </section>
 </section>
 
 <script>
@@ -87,7 +86,7 @@ $( document ).ready(function onDocumentReady () {
   /**
   * Add on click listener to each button in side bar
   */
-  $('.search-facets button') //?
+  $('.search-facets-uamx button') //?
     .click(function onFacetsClick() {
 
       var type = $(this).data("facet")
@@ -126,12 +125,12 @@ $( document ).ready(function onDocumentReady () {
          // If a certain facet is selected, hide all buttons but the selected one
 
          // hide all facet buttons
-         $('.search-facets button[data-facet="' + facet + '"]')
+         $('.search-facets-uamx button[data-facet="' + facet + '"]')
            .parent()
            .addClass('hidden');
 
          // Show only the facet selected
-         $('.search-facets button[data-facet="' + facet + '"][data-value="' + filters[facet] + '"]')
+         $('.search-facets-uamx button[data-facet="' + facet + '"][data-value="' + filters[facet] + '"]')
            .addClass('selected')
            .parent()
            .removeClass('hidden');
@@ -139,7 +138,7 @@ $( document ).ready(function onDocumentReady () {
        } else {
 
          // if there is no facet selected, show all buttons
-         $('.search-facets button[data-facet="' + facet + '"]')
+         $('.search-facets-uamx button[data-facet="' + facet + '"]')
            .removeClass('selected')
            .parent()
            .removeClass("hidden");
@@ -265,7 +264,7 @@ $( document ).ready(function onDocumentReady () {
 
     // Each facet option has a dataset with facet category and facet name.
     // If it matches with the current filtersCount dictionary, fill the text with the value provided by the dict
-    $('.search-facets .facet-option').each(function () {
+    $('.search-facets-uamx .facet-option').each(function () {
 
       var facet = $(this).data('facet'); // facet category
       var value = $(this).data('value'); // facet name
