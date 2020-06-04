@@ -5,6 +5,9 @@
   from openedx.core.djangolib.js_utils import js_escaped_string, dump_js_escaped_json
 %>
 <%inherit file="../main.html" />
+<%
+  course_discovery_enabled = settings.FEATURES.get('ENABLE_COURSE_DISCOVERY')
+%>
 
 <%namespace name='static' file='../static_content.html'/>
 
@@ -15,6 +18,14 @@
       <%static:include path="discovery/${template_name}.underscore" />
   </script>
   % endfor
+  <%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory">
+    DiscoveryFactory(
+      ${course_discovery_meanings | n, dump_js_escaped_json},
+      getParameterByName('search_query'),
+      "${user_language | n, js_escaped_string}",
+      "${user_timezone | n, js_escaped_string}"
+    );
+  </%static:require_module>
 </%block>
 % endif
 
@@ -36,7 +47,7 @@
           <div id="discovery-message" class="search-status-label"></div>
           <form class="wrapper-search-input">
             <label for="discovery-input" class="sr">${_('Search for a course')}</label>
-            <input id="discovery-input" class="discovery-input" placeholder="${_('Search for a course')}" type="text"/>
+            <input id="discovery-input" name="search_query" class="discovery-input" placeholder="${_('Search for a course')}" type="text"/>
             <button type="submit" class="button postfix discovery-submit" title="${_('Search')}">
               <span class="icon fa fa-search" aria-hidden="true"></span>
               <div aria-live="polite" aria-relevant="all">
@@ -83,7 +94,7 @@
 
 // Filters keys are used as text in buttons, but some need to be parsed with the following dictionary
 var KEY_TO_STRING_MAP = {
-  'org': 'HADtech',
+  'org': 'hadtech',
   'vnu': 'vnu',
   'UNV': 'UNV',
   'fdoc': 'Formación docente',
