@@ -33,6 +33,13 @@
 
 
 <main id="main" aria-label="Content" tabindex="-1">
+ <div class="uamx_search-loading hidden">
+    <h4>Loading...
+      <span class="icon fa fa-spinner fa-spin"></span>
+    </h4>
+  </div>
+
+
     <section class="find-courses">
       <section class="courses-container">
         % if course_discovery_enabled:
@@ -51,24 +58,27 @@
               </div>
             </button>
           </form>
-        </div>
 
-        <div id="filter-bar" class="filters hide-phone is-collapsed">
+				<button class="btn btn-primary uamx_facet_collapse" type="button" data-toggle="collapse" data-target="#facetFilter" aria-expanded="false" aria-controls="facetFilter">
+			<span class="icon fa fa-filter"></span>
+		  </button>
+		</div>
+
+		<div id="filter-bar" class="filters hide-phone is-collapsed">
         </div>
         % endif
 
-        <div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
+		<div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
           <ul class="courses-listing courses-list">
             %for course in courses:
-            <li class="courses-listing-item">
+            <li class="courses-listing-item courses-listing-item-uamx">
               <%include file="../course.html" args="course=course" />
             </li>
             %endfor
           </ul>
         </div>
 
-
-        % if course_discovery_enabled:
+		% if course_discovery_enabled:
         <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
           <h2 class="header-search-facets">${_('Refine Your Search')}</h2>
           <section class="search-facets-lists search-facets-uamx">
@@ -84,18 +94,22 @@
 
 // Filters keys are used as text in buttons, but some need to be parsed with the following dictionary
 var KEY_TO_STRING_MAP = {
-  'organization': 'HADtech',
-  'vnu': 'vnu',
-  'UNV': 'UNV',
+  'organization': 'Oferta académica',
+  'uamx': 'vnu',
+  'fcon': 'UNV',
   'fdoc': 'Formación docente',
   'mooc': 'MOOC',
   'edx': 'MOOC',
   'otras': 'Otras',
-  'subjects': 'Subjects',
+  'materias': 'Materias',
+  'facultades': 'Facultades',
+  'invitationonly': 'Formato',
+  'cerrado': 'Por invitación',
+  'abierto': 'Abierto'
 }
 
 // Templates and custom keys
-var VIEWING_COURSES_TEMPLATE = 'Showing ~@PARTIAL@~ from ~@TOTAL@~ courses.';
+var VIEWING_COURSES_TEMPLATE = 'Mostrando ~@PARTIAL@~ de ~@TOTAL@~ cursos.';
 var VIEWING_COURSES_TEMPLATE_PARTIAL = '~@PARTIAL@~';
 var VIEWING_COURSES_TEMPLATE_TOTAL = '~@TOTAL@~';
 
@@ -116,8 +130,10 @@ var query_string = window.location.search.substring(1);
 // Initialize filters object with values  passed in the URL query
 var filters = {
   query: parse_query_string(query_string).search_query,
-  subjects: parse_query_string(query_string).subjects,
-  organization: parse_query_string(query_string).organization,
+  materias: parse_query_string(query_string).materias,
+  organizacion: parse_query_string(query_string).organizacion,
+  facultades: parse_query_string(query_string).facultades,
+  invitationonly: parse_query_string(query_string).invitationonly,
 };
 
 $( document ).ready(function onDocumentReady () {
@@ -137,7 +153,7 @@ $( document ).ready(function onDocumentReady () {
   /**
   * Add on click listener to each button in side bar
   */
-  $('.search-facets-uamx button') //?
+  $('.search-facets-uamx button')
     .click(function onFacetsClick() {
 
       var type = $(this).data("facet")
@@ -247,7 +263,7 @@ $( document ).ready(function onDocumentReady () {
   function renderCoursesList () {
 
     // Retrieve all course HTML items
-    var items = $('.courses-listing-item');
+    var items = $('.course-listing-item_uamx');
 
     // Retrieve all active filters
     var filtersCount = {}
@@ -255,8 +271,10 @@ $( document ).ready(function onDocumentReady () {
       filtersCount[key] = filtersCount[key] || {};
     }
 
-    var rgxSubjects = new RegExp(filters["subjects"], "i");
+    var rgxFacultades = new RegExp(filters["facultades"], "i");
+    var rgxMaterias = new RegExp(filters["materias"], "i");
     var rgxOrganization = new RegExp(filters["organization"], "i");
+    var rgxInvitation = new RegExp(filters["invitationonly"], "i");
     var rgxQuery = new RegExp(filters["query"], "i");
 
     items.each(function () {
@@ -264,15 +282,17 @@ $( document ).ready(function onDocumentReady () {
       // For each course, retrieve dataset and parse into separated variables.
       // Variables are Boolean values, indicating whether course matches the filters selected and should be shown (true) or not (false).
 
-      var xsubjects = filters["subjects"] && $(this).data("subjects").match(rgxSubjects);
+      var xfacultades = filters["facultades"] && $(this).data("facultades").match(rgxFacultades);
+      var xmaterias = filters["materias"] && $(this).data("materias").match(rgxMaterias);
       var xorganization = filters["organization"] && $(this).data("organization").match(rgxOrganization);
+      var xinvitationonly = filters["invitationonly"] && $(this).data("invitationonly").match(rgxInvitation);
       var xquery = filters["query"] && $(this).find('.course-name').text().match(rgxQuery);
 
       // Get how many filters are currently active, in number
-      var selectedFilters = [filters["subjects"], filters["organization"], filters["query"]].filter(Boolean);
+      var selectedFilters = [filters["facultades"], filters["materias"], filters["organization"], filters["invitationonly"], filters["query"]].filter(Boolean);
 
       // Get how many filters match the course, in number
-      var matchingFilters = [xsubjects, xorganization, xquery].filter(Boolean);
+      var matchingFilters = [xfacultades, xmaterias, xorganization, xinvitationonly, xquery].filter(Boolean);
 
       // If number of selectedFilters is equal to matching filters, then course should be shown
       if (selectedFilters.length === matchingFilters.length) {
@@ -293,7 +313,7 @@ $( document ).ready(function onDocumentReady () {
     });
 
     // courses-list-title-uamx is the course container, it should be hidden if there are no courses showed in it
-    $(".courses-list-title").each(function () {
+    $(".courses-list-title_uamx").each(function () {
       if ($(this).next('ul').children(":not(.hidden)").length === 0) {
         $(this).addClass("hidden");
       } else {
@@ -335,8 +355,8 @@ $( document ).ready(function onDocumentReady () {
   */
   function renderViewingText () {
 
-    var count_show = $('.courses-listing-item').not('.hidden').length;
-    var total = $('.courses-listing-item').length;
+    var count_show = $('.course-listing-item_uamx').not('.hidden').length;
+    var total = $('.course-listing-item_uamx').length;
     $('#discovery-message').text(function (index, text) {
       return VIEWING_COURSES_TEMPLATE
         .replace(VIEWING_COURSES_TEMPLATE_PARTIAL, count_show)
@@ -348,6 +368,7 @@ $( document ).ready(function onDocumentReady () {
   render();
 
   // hide loader and show filtered courses list
+  $('.uamx_search-loading').addClass('hidden');
   $('.find-courses').removeClass('hidden');
 });
 
