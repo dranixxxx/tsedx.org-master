@@ -94,14 +94,14 @@
 
 // Filters keys are used as text in buttons, but some need to be parsed with the following dictionary
 var KEY_TO_STRING_MAP = {
-  'organization': 'Oferta académica',
+  'org': 'Oferta académica',
   'uamx': 'vnu',
   'fcon': 'UNV',
   'fdoc': 'Formación docente',
   'mooc': 'MOOC',
   'edx': 'MOOC',
   'otras': 'Otras',
-  'materias': 'Materias',
+  'mater': 'Materias',
   'facultades': 'Facultades',
   'invitationonly': 'Formato',
   'cerrado': 'Por invitación',
@@ -109,7 +109,7 @@ var KEY_TO_STRING_MAP = {
 }
 
 // Templates and custom keys
-var VIEWING_COURSES_TEMPLATE = 'Mostrando ~@PARTIAL@~ de ~@TOTAL@~ cursos.';
+var VIEWING_COURSES_TEMPLATE = 'View ~@PARTIAL@~ of ~@TOTAL@~ courses.';
 var VIEWING_COURSES_TEMPLATE_PARTIAL = '~@PARTIAL@~';
 var VIEWING_COURSES_TEMPLATE_TOTAL = '~@TOTAL@~';
 
@@ -131,7 +131,7 @@ var query_string = window.location.search.substring(1);
 var filters = {
   query: parse_query_string(query_string).search_query,
   materias: parse_query_string(query_string).materias,
-  organization: parse_query_string(query_string).organization,
+  org: parse_query_string(query_string).org,
   facultades: parse_query_string(query_string).facultades,
   invitationonly: parse_query_string(query_string).invitationonly,
 };
@@ -273,9 +273,9 @@ $( document ).ready(function onDocumentReady () {
 
     var rgxFacultades = new RegExp(filters["facultades"], "i");
     var rgxMaterias = new RegExp(filters["materias"], "i");
-    var rgxOrganization = new RegExp(filters["organization"], "i");
+    var rgxOrganization = new RegExp(filters["org"], "i");
     var rgxInvitation = new RegExp(filters["invitationonly"], "i");
-    var rgxQuery = new RegExp(filters["search_query"], "i");
+    var rgxQuery = new RegExp(filters["query"], "i");
 
     items.each(function () {
 
@@ -284,15 +284,15 @@ $( document ).ready(function onDocumentReady () {
 
       var xfacultades = filters["facultades"] && $(this).data("facultades").match(rgxFacultades);
       var xmaterias = filters["materias"] && $(this).data("materias").match(rgxMaterias);
-      var xorganization = filters["organization"] && $(this).data("organization").match(rgxOrganization);
+      var xorg = filters["org"] && $(this).data("org").match(rgxOrg);
       var xinvitationonly = filters["invitationonly"] && $(this).data("invitationonly").match(rgxInvitation);
       var xquery = filters["query"] && $(this).find('.course-name').text().match(rgxQuery);
 
       // Get how many filters are currently active, in number
-      var selectedFilters = [filters["facultades"], filters["materias"], filters["organization"], filters["invitationonly"], filters["query"]].filter(Boolean);
+      var selectedFilters = [filters["facultades"], filters["materias"], filters["org"], filters["invitationonly"], filters["query"]].filter(Boolean);
 
       // Get how many filters match the course, in number
-      var matchingFilters = [xfacultades, xmaterias, xorganization, xinvitationonly, xquery].filter(Boolean);
+      var matchingFilters = [xfacultades, xmaterias, xorg, xinvitationonly, xquery].filter(Boolean);
 
       // If number of selectedFilters is equal to matching filters, then course should be shown
       if (selectedFilters.length === matchingFilters.length) {
