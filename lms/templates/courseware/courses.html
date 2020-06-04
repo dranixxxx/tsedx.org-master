@@ -71,7 +71,7 @@
 		<div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
           <ul class="courses-listing courses-list">
             %for course in courses:
-            <li class="courses-listing-item courses-listing-item-uamx">
+            <li class="courses-listing-item course-listing-item_uamx">
               <%include file="../course.html" args="course=course" />
             </li>
             %endfor
@@ -95,8 +95,8 @@
 // Filters keys are used as text in buttons, but some need to be parsed with the following dictionary
 var KEY_TO_STRING_MAP = {
   'org': 'Oferta académica',
-  'uamx': 'vnu',
-  'fcon': 'UNV',
+  'vnu': 'vnu',
+  'UNV': 'UNV',
   'fdoc': 'Formación docente',
   'mooc': 'MOOC',
   'edx': 'MOOC',
