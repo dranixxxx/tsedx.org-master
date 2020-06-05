@@ -13,6 +13,11 @@
 
 % if course_discovery_enabled:
 <%block name="header_extras">
+  % for template_name in ["course_card", "filter_bar", "facet", "facet_option"]:
+  <script type="text/template" id="${template_name}-tpl">
+      <%static:include path="discovery/${template_name}.underscore" />
+  </script>
+  % endfor
   <%static:require_module module_name="js/discovery/discovery_factory" class_name="DiscoveryFactory">
     DiscoveryFactory(
       ${course_discovery_meanings | n, dump_js_escaped_json},
@@ -63,29 +68,7 @@
         </div>
         % endif
 
-		<div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
-          <ul class="courses-listing courses-list">
-            %for course in courses:
-            <li class="courses-listing-item course-listing-item_uamx">
-              <%include file="../course.html" args="course=course" />
-            </li>
-            %endfor
-          </ul>
-        </div>
-
-		% if course_discovery_enabled:
-        <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
-          <h2 class="header-search-facets">${_('Refine Your Search')}</h2>
-          <section class="search-facets-lists search-facets-uamx">
-          </section>
-        </aside>
-        % endif
-
-      </section>
-    </section>
-</main>
-
-<script>
+        <script>
 
 // Filters keys are used as text in buttons, but some need to be parsed with the following dictionary
 var KEY_TO_STRING_MAP = {
@@ -391,3 +374,26 @@ function parse_query_string(query) {
   return query_string;
 }
 </script>
+
+		<div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
+          <ul class="courses-listing courses-list">
+            %for course in courses:
+            <li class="courses-listing-item course-listing-item_uamx">
+              <%include file="../course.html" args="course=course" />
+            </li>
+            %endfor
+          </ul>
+        </div>
+
+		% if course_discovery_enabled:
+        <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
+          <h2 class="header-search-facets">${_('Refine Your Search')}</h2>
+          <section class="search-facets-lists search-facets-uamx">
+          </section>
+        </aside>
+        % endif
+
+      </section>
+    </section>
+</main>
+
