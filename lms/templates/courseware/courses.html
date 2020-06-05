@@ -13,7 +13,7 @@
 
 % if course_discovery_enabled:
 <%block name="header_extras">
-  % for template_name in ["course_card", "filter_bar", "facet", "facet_option"]:
+  % for template_name in ["course_card", "filter_bar", "filter", "facet", "facet_option"]:
   <script type="text/template" id="${template_name}-tpl">
       <%static:include path="discovery/${template_name}.underscore" />
   </script>
@@ -59,13 +59,19 @@
             </button>
           </form>
 
-				<button class="btn btn-primary uamx_facet_collapse" type="button" data-toggle="collapse" data-target="#facetFilter" aria-expanded="false" aria-controls="facetFilter">
-			<span class="icon fa fa-filter"></span>
-		  </button>
+				
 		</div>
 
 		<div id="filter-bar" class="filters hide-phone is-collapsed">
         </div>
+        % endif
+
+        % if course_discovery_enabled:
+        <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
+          <h2 class="header-search-facets">${_('Refine Your Search')}</h2>
+          <section class="search-facets-lists search-facets-uamx">
+          </section>
+        </aside>
         % endif
 
         <script>
@@ -385,13 +391,7 @@ function parse_query_string(query) {
           </ul>
         </div>
 
-		% if course_discovery_enabled:
-        <aside aria-label="${_('Refine Your Search')}" class="search-facets phone-menu">
-          <h2 class="header-search-facets">${_('Refine Your Search')}</h2>
-          <section class="search-facets-lists search-facets-uamx">
-          </section>
-        </aside>
-        % endif
+
 
       </section>
     </section>
