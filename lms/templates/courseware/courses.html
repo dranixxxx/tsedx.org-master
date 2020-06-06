@@ -366,7 +366,7 @@ function parse_query_string(query) {
         <div class="courses${'' if course_discovery_enabled else ' no-course-discovery'}" role="region" aria-label="${_('List of Courses')}">
           <ul class="courses-listing courses-list">
             %for course in courses:
-            <li class="courses-listing-item courses-listing-item-uamx">
+            <li class="courses-listing-item course-listing-item-uamx">
               <%include file="../course.html" args="course=course" />
             </li>
             %endfor
