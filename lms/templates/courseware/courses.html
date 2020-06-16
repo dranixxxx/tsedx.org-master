@@ -250,7 +250,7 @@ $( document ).ready(function onDocumentReady () {
 
       var xfacultades = filters["facultades"] && $(this).data("facultades").match(rgxFacultades);
       var xmaterias = filters["materias"] && $(this).data("materias").match(rgxMaterias);
-      var xorg = filters["org"] && $(this).data("org").match(rgxOrganization);
+      var xorg = filters["org"] && $(this).data("org").match(rgxOrg);
       var xinvitationonly = filters["invitationonly"] && $(this).data("invitationonly").match(rgxInvitation);
       var xquery = filters["query"] && $(this).find('.course-name').text().match(rgxQuery);
 
